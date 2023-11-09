@@ -88,6 +88,8 @@ class LocationService:
             location.parent = Location.objects.get(uuid=parent_uuid)
         location.save()
         self._ensure_user_belongs_to_district(location)
+        print("Yeah everyting worked well")
+        return location
 
     def _check_users_locations_rights(self, loc_type):
         if self.user.is_superuser \
@@ -131,7 +133,7 @@ class HealthFacilityService:
         if HealthFacility.objects.filter(code=code, validity_to__isnull=True).exists():
             return [{"message": "Health facility code %s already exists" % code}]
         return []
-
+    
     @register_service_signal('health_facility_service.update_or_create')
     def update_or_create(self, data):
         hf_uuid = data.pop('uuid') if 'uuid' in data else None
