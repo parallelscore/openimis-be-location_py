@@ -107,7 +107,6 @@ class LocationService:
             location.parent = Location.objects.get(uuid=parent_uuid)
         location.save()
         self._ensure_user_belongs_to_district(location)
-        print("Yeah everyting worked well")
         return location
 
     def _check_users_locations_rights(self, loc_type):
